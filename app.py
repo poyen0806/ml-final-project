@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # define routes
-@app.route('/')
+@app.route('/css')
 def index():
     return render_template('index.html')
 
