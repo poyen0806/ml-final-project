@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<div class="demo-page">
+    <main class="demo-page-content">
+        <div class="home">
+            <section>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="nice-form-group">
+                        {{ form.height.label }}<br>
+                        {{ form.height(size=32) }}
+                    </div>
+                    <div class="nice-form-group">
+                        {{ form.weight.label }}<br>
+                        {{ form.weight(size=32) }}
+                    </div>
+                    <div class="nice-form-group">
+                        {{ form.body_part.label }}<br>
+                        {{ form.body_part(size=32) }}
+                    </div>
+                    <div class="nice-form-group">
+                        {{ form.video.label }}<br>
+                        {{ form.video() }}
+                    </div>
+                    <div class="nice-form-group">
+                        {{ form.photo.label }}<br>
+                        {{ form.photo() }}
+                    </div>
+                    <div class="nice-form-group">
+                        {{ form.additional_info.label }}<br>
+                        {{ form.additional_info() }}
+                    </div>
+                    <p><input type="submit" value="Submit"></p>
+                </form>
+            </section>
+            <section>
+                {% if test %}
+                    <p>{{ test }}</p>
+                {% endif %}
+                {% if data %}
+                    <p>Height: {{ data.height }}</p>
+                    <p>Weight: {{ data.weight }}</p>
+                    <p>Body_part: {{ data.body_part }}</p>
+                    <p>Vodio: {{ data.video }}</p>
+                    <p>Photo: {{ data.photo }}</p>
+                    <p>Additional Info: {{ data.additional_info }}</p>
+                {% endif %}
+                {% if form.errors %}
+                {{ form.errors }}
+                {% endif %}
+            </section>
+        </div>
+    </main>
+</div>
+
+{% with messages = get_flashed_messages(category_filter=['success']) %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+{% endblock content %}
