@@ -1,16 +1,10 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
+import google.generativeai as genai
 from configparser import ConfigParser
-import os
 
 # Config Parser
 config = ConfigParser()
 config.read("config.ini")
-os.environ["GOOGLE_API_KEY"] = config["Gemini"]["API_KEY"]
-
-# Importing the ChatGoogleGenerativeAI class
-L1_llm = ChatGoogleGenerativeAI(model="gemini-pro", convert_system_message_to_human=False)
-L2_llm = ChatGoogleGenerativeAI(model="gemini-pro", convert_system_message_to_human=False)
-L3_llm = ChatGoogleGenerativeAI(model="gemini-pro", convert_system_message_to_human=False)
+genai.configure(api_key=config["Gemini"]["API_KEY"])
 
 # Get user inbody data
 import random
@@ -35,33 +29,14 @@ inbody = {
 # Convert inbody data to a human-readable string
 inbody_message = "\n".join([f"{key}: {value}" for key, value in inbody.items()])
 
-# Use inbody message to generate analysis (LLM1)
-from langchain_core.messages import SystemMessage, HumanMessage
+# Initialize the generative model and give some simple advice
+llm = genai.GenerativeModel('gemini-1.5-flash')
+chat = llm.start_chat(history=[])
+result = chat.send_message("你是一個健身教練，只能夠回答關於健身的問題，若問題跟健身無關請回答:我無法回答。不提供飲食建議。")
+result = chat.send_message("現在有一個身體數據，請問你能幫忙分析嗎？要減脂還是增肌？上下肢哪裡需要加強？需要增強哪些肌肉？")
+result = chat.send_message(inbody_message)
+print(result.text)
 
-L1_result = L1_llm.invoke(
-    [
-        SystemMessage(content="根據以下資訊，分析要減脂還是增肌？上肢左右是否不平衡？下肢左右是否不平衡？整體身體是否平衡？"),
-        HumanMessage(content=inbody_message)
-    ]
-)
-print(L1_result.content)
-
-# Use L1_result to generate a menu (LLM2)
-L2_result = L2_llm.invoke(
-    [
-        SystemMessage(content="根據您的健康檢查報告，為您生成一週的健身菜單。以下是您的健身建議和計劃："),
-        HumanMessage(content=L1_result.content)
-    ]
-)
-print(L2_result.content)
-
-# Translate the menu into traditional Chinese (LLM3)
-L3_result = L3_llm.invoke(
-    [
-        SystemMessage(content="將健身菜單翻譯成繁體中文。"),
-        HumanMessage(content=L2_result.content)
-    ]
-)
-print(L3_result.content)
-
-# 他三層都生不出我要的東西
+# Generate a workout menu based on the advice
+result = chat.send_message("請幫忙設計一個適合的訓練菜單，動作名稱、組數、每組做多少次請詳細說明。只需提供訓練菜單，不用提供飲食建議。")
+print(result.text)

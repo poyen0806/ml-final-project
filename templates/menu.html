@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Training Menu Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Training Menu Generator</h1>
+      {% with messages=get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <form method="POST" action="{{ url_for('menu') }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">{{ form.Gender.label }}
+          {{ form.Gender(class='form-control') }}</div>
+        <div class="form-group">{{ form.Age.label }}
+          {{ form.Age(class='form-control') }}</div>
+        <div class="form-group">{{ form.Height.label }}
+          {{ form.Height(class='form-control') }}</div>
+        <div class="form-group">{{ form.Weight.label }}
+          {{ form.Weight(class='form-control') }}</div>
+        <div class="form-group">{{ form.SkeletalMuscleWeight.label }}
+          {{ form.SkeletalMuscleWeight(class='form-control') }}</div>
+        <div class="form-group">{{ form.BodyFatWeight.label }}
+          {{ form.BodyFatWeight(class='form-control') }}</div>
+        <div class="form-group">{{ form.BodyFatIndex.label }}
+          {{ form.BodyFatIndex(class='form-control') }}</div>
+        <div class="form-group">{{ form.BodyFatPercentage.label }}
+          {{ form.BodyFatPercentage(class='form-control') }}</div>
+        <div class="form-group">{{ form.BasalMetabolicRate.label }}
+          {{ form.BasalMetabolicRate(class='form-control') }}</div>
+        <div class="form-group">{{ form.BodyWater.label }}
+          {{ form.BodyWater(class='form-control') }}</div>
+        <div class="form-group">{{ form.LeftHandMuscleMass.label }}
+          {{ form.LeftHandMuscleMass(class='form-control') }}</div>
+        <div class="form-group">{{ form.RightHandMuscleMass.label }}
+          {{ form.RightHandMuscleMass(class='form-control') }}</div>
+        <div class="form-group">{{ form.LeftLegMuscleMass.label }}
+          {{ form.LeftLegMuscleMass(class='form-control') }}</div>
+        <div class="form-group">{{ form.RightLegMuscleMass.label }}
+          {{ form.RightLegMuscleMass(class='form-control') }}</div>
+        <div class="form-group">{{ form.TrunkMuscleMass.label }}
+          {{ form.TrunkMuscleMass(class='form-control') }}</div>
+        <button type="submit" class="btn btn-primary">Generate Workout Menu</button>
+      </form>
+
+      {% if data %}
+        <h2>Input Data</h2>
+        <ul>
+          {% for key, value in data.items() %}
+            <li>{{ key }}: {{ value }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if workout_menu %}
+        <h2>Generated Workout Menu</h2>
+        <pre>{{ workout_menu }}</pre>
+      {% endif %}
+    </div>
+  </body>
+</html>
