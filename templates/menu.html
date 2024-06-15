@@ -3,30 +3,34 @@
       Training Menu Generator
     {% endblock title %}
     {% block head %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" /> 
+    <style>
+      input[type='radio']:checked::after {
+        background-color: black;
+      }
+    </style>
     {% endblock head %}
 {% block content %}
+<main class="demo-page-content">
     <div class="container">
       <h1>Training Menu Generator</h1>
-      {% with messages=get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">{{ message }}</div>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
       <section>
       <form method="POST" novalidate action="{{ url_for('menu') }}">
         {{ form.hidden_tag() }}
-        <div class="form-group">{{ form.Gender.label }}
-          {{ form.Gender(class='form-control') }}
+        <fieldset>
+          <div>
+          {{ form.Gender.label }}
+          {% for subfield in form.Gender %}
+                  {{ subfield }} {{ subfield.label }}
+          {% endfor %}
           {% if form.Gender.errors %}
             <div class="alert alert-danger">
                 {{ form.Gender.errors[0] }}
             </div>
           {% endif %}
-        </div>
-        <div class="form-group">{{ form.Age.label }}
+          </div>
+          </fieldset>
+        <div class="nice-form-group">{{ form.Age.label }}
           {{ form.Age(class='form-control') }}
           {% if form.Age.errors %}
             <div class="alert alert-danger">
@@ -34,7 +38,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">{{ form.Height.label }}
+        <div class="nice-form-group">{{ form.Height.label }}
           {{ form.Height(class='form-control') }}
           {% if form.Height.errors %}
             <div class="alert alert-danger">
@@ -42,7 +46,7 @@
             </div>
           {% endif %} 
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.Weight.label }}
           {{ form.Weight(class='form-control') }}
           {% if form.Weight.errors %}
@@ -51,7 +55,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.SkeletalMuscleWeight.label }}
           {{ form.SkeletalMuscleWeight(class='form-control') }}
           {% if form.SkeletalMuscleWeight.errors %}
@@ -60,7 +64,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.BodyFatWeight.label }}
           {{ form.BodyFatWeight(class='form-control') }}
           {% if form.BodyFatWeight.errors %}
@@ -69,7 +73,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.BodyFatIndex.label }}
           {{ form.BodyFatIndex(class='form-control') }}
           {% if form.BodyFatIndex.errors %}
@@ -78,7 +82,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.BodyFatPercentage.label }}
           {{ form.BodyFatPercentage(class='form-control') }}
           {% if form.BodyFatPercentage.errors %}
@@ -87,7 +91,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.BasalMetabolicRate.label }}
           {{ form.BasalMetabolicRate(class='form-control') }}
           {% if form.BasalMetabolicRate.errors %}
@@ -97,7 +101,7 @@
           {% endif %}
           
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.BodyWater.label }}
           {{ form.BodyWater(class='form-control') }}
           {% if form.BodyWater.errors %}
@@ -106,7 +110,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.LeftHandMuscleMass.label }}
           {{ form.LeftHandMuscleMass(class='form-control') }}
           {% if form.LeftHandMuscleMass.errors %}
@@ -115,7 +119,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.RightHandMuscleMass.label }}
           {{ form.RightHandMuscleMass(class='form-control') }}
           {% if form.RightHandMuscleMass.errors %}
@@ -124,7 +128,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.LeftLegMuscleMass.label }}
           {{ form.LeftLegMuscleMass(class='form-control') }}
           {% if form.LeftLegMuscleMass.errors %}
@@ -133,7 +137,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.RightLegMuscleMass.label }}
           {{ form.RightLegMuscleMass(class='form-control') }}
           {% if form.RightLegMuscleMass.errors %}
@@ -143,7 +147,7 @@
           {% endif %}
           
         </div>
-        <div class="form-group">
+        <div class="nice-form-group">
           {{ form.TrunkMuscleMass.label }}
           {{ form.TrunkMuscleMass(class='form-control') }}
           {% if form.TrunkMuscleMass.errors %}
@@ -173,4 +177,5 @@
         <pre>{{ workout_menu }}</pre>
       {% endif %}
     </div>
+    </main>
     {% endblock content %}
