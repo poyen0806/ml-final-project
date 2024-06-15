@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<div class="demo-page">
+    <main class="demo-page-content">
+        <div class="home">
+            <section>
+                {% if workout_menu %}
+                <h2>Generated Workout Menu</h2>
+                {% markdown %}
+                {{ workout_menu }}
+                {% endmarkdown %}
+                {% endif %}
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock content %}
