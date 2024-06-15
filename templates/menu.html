@@ -169,19 +169,6 @@
         <h2>Generated Workout Menu</h2>
         <pre>{{ workout_menu }}</pre>
       {% endif %}
-
-      {% if data %}
-        <script>
-          var data = {{ data|tojson|safe }};
-          var message = '';
-          for (var key in data) {
-            if (data.hasOwnProperty(key)) {
-              message += key + ': ' + data[key] + '\n';
-            }
-          }
-          alert(message);
-        </script>
-      {% endif %}
     </div>
   </body>
 </html>
