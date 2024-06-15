@@ -7,7 +7,33 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
   font: inherit;
   vertical-align: initial;
 }
+nav {
+  background-color: #f8f8f8;
+  padding: 10px;
+}
 
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #ddd;
+}
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block;
 }

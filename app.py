@@ -21,20 +21,11 @@ def test():
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
-    form = TrainingForm()
-    data = None  # 初始化 data 為 None
-    if form.validate_on_submit():
-        data = {
-            'height': form.height.data,
-            'weight': form.weight.data,
-            'body_part': form.body_part.data,
-            'video': form.video.data,
-            'photo': form.photo.data,
-            'additional_info': form.additional_info.data
-        }
-        flash('Data Submitted Successfully', 'success')
-        return render_template('home.html', form=form, data=data)
-    return render_template('home.html', form=form, data=data)
+    return render_template('home.html')
+
+@app.route('/photo', methods=['POST', 'GET'])
+def photo():
+    return render_template('photo.html')
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():

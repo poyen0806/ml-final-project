@@ -5,8 +5,17 @@
   <title>{% block title %} title {% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel="stylesheet" href="../static/css/style.css">
+{% block head %}{% endblock %}
+
 </head>
 <body data-new-gr-c-s-check-loaded="14.1068.0" data-gr-ext-installed> 
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('home') }}">使用說明</a></li>
+      <li><a href="{{ url_for('menu') }}">訓練菜單</a></li>
+      <li><a href="{{ url_for('photo') }}">姿勢調整</a></li>
+    </ul>
+  </nav>
 {% block content %}
 
 {% endblock %}

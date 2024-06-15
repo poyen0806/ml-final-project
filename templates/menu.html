@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Training Menu Generator</title>
+{% extends "base.html" %}
+    {% block title %}
+      Training Menu Generator
+    {% endblock title %}
+    {% block head %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-  </head>
-  <body>
+    {% endblock head %}
+{% block content %}
     <div class="container">
       <h1>Training Menu Generator</h1>
       {% with messages=get_flashed_messages(with_categories=true) %}
@@ -15,6 +15,7 @@
           {% endfor %}
         {% endif %}
       {% endwith %}
+      <section>
       <form method="POST" novalidate action="{{ url_for('menu') }}">
         {{ form.hidden_tag() }}
         <div class="form-group">{{ form.Gender.label }}
@@ -153,6 +154,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Generate Workout Menu</button>
       </form>
+      </section>
+      
   
 
 
@@ -170,5 +173,4 @@
         <pre>{{ workout_menu }}</pre>
       {% endif %}
     </div>
-  </body>
-</html>
+    {% endblock content %}
