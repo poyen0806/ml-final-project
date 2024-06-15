@@ -62,7 +62,11 @@ def menu():
         }
         workout_menu = generate_workout_menu(data)
         flash('Workout Menu Generated Successfully', 'success')
-    
+        return render_template('menu.html', form=form, data=data, workout_menu=workout_menu)
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in the {getattr(form, field).label.text} field - {error}")
     return render_template('menu.html', form=form, data=data, workout_menu=workout_menu)
 
 def generate_workout_menu(data):

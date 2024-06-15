@@ -9,7 +9,7 @@ class TrainingForm(FlaskForm):
     photo = FileField('Photo' )
     additional_info = TextAreaField('Additional Info')
 
-    
+      
     Gender = StringField('Gender', validators=[DataRequired()])
     Age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=18, max=65)])
     Height = FloatField('Height (cm)', validators=[DataRequired(), NumberRange(min=150, max=190)])
