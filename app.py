@@ -2,11 +2,21 @@
 import time
 from flask_markdown import markdown
 from flask import Flask, render_template, flash, redirect, url_for, request
-from form import TrainingForm
+from form import TrainingForm, PhotoForm
 from configparser import ConfigParser
 import google.generativeai as genai
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
+
+UPLOAD_FOLDER = 'static'
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 app.config['SECRET_KEY'] = 'mysecretkey'
 markdown(app)
 config = ConfigParser()
@@ -26,7 +36,22 @@ def home():
 
 @app.route('/photo', methods=['POST', 'GET'])
 def photo():
-    return render_template('photo.html')
+    form = PhotoForm()
+    video = None
+    photo = None
+
+    if form.validate_on_submit():
+        video = form.video.data
+        photo = form.photo.data
+        photo_filename = secure_filename(photo.filename)
+        photo.save(os.path.join('static', photo_filename))
+        flash('Files uploaded successfully', 'success')        
+        return render_template('photo.html',form = form,photo=photo_filename)  # Redirect to the same page after successful submission
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in the {getattr(form, field).label.text} field - {error}")
+        return render_template('photo.html',form=form)
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():

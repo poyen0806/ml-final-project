@@ -26,3 +26,7 @@ class TrainingForm(FlaskForm):
     RightLegMuscleMass = FloatField('Right Leg Muscle Mass (kg)', validators=[DataRequired(), NumberRange(min=5, max=12)])
     TrunkMuscleMass = FloatField('Trunk Muscle Mass (kg)', validators=[DataRequired(), NumberRange(min=20, max=50)])
     submit = SubmitField('Submit')
+    
+class PhotoForm(FlaskForm):
+    video = FileField('Video', validators=[DataRequired()])
+    photo = FileField('Photo', validators=[DataRequired()])
