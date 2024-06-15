@@ -17,19 +17,10 @@
       <section>
       <form method="POST" novalidate action="{{ url_for('menu') }}">
         {{ form.hidden_tag() }}
-        <fieldset>
-          <div>
-          {{ form.Gender.label }}
-          {% for subfield in form.Gender %}
-                  {{ subfield }} {{ subfield.label }}
-          {% endfor %}
-          {% if form.Gender.errors %}
-            <div class="alert alert-danger">
-                {{ form.Gender.errors[0] }}
-            </div>
-          {% endif %}
-          </div>
-          </fieldset>
+        <div class="form-group">
+          <label for="Gender" class="nice-form-group">Gender:</label>
+          {{ form.Gender(class="form-control", id="Gender") }}
+      </div>
         <div class="nice-form-group">{{ form.Age.label }}
           {{ form.Age(class='form-control') }}
           {% if form.Age.errors %}
