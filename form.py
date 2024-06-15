@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, StringField, FloatField, FileField, SubmitField, TextAreaField
+from wtforms import IntegerField, SelectField, StringField, FloatField, FileField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, NumberRange
 
 class TrainingForm(FlaskForm):
@@ -10,8 +10,8 @@ class TrainingForm(FlaskForm):
     additional_info = TextAreaField('Additional Info')
 
       
-    Gender = StringField('Gender', validators=[DataRequired()])
-    Age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=18, max=65)])
+    Gender = SelectField('Gender', choices=['Male', 'Female'], validators=[DataRequired()])
+    Age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=12, max=65)])
     Height = FloatField('Height (cm)', validators=[DataRequired(), NumberRange(min=150, max=190)])
     Weight = FloatField('Weight (kg)', validators=[DataRequired(), NumberRange(min=50, max=100)])
     SkeletalMuscleWeight = FloatField('Skeletal Muscle Weight (kg)', validators=[DataRequired(), NumberRange(min=20, max=50)])
