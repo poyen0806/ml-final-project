@@ -8,7 +8,12 @@ Home
     <main class="demo-page-content">
         <div class="home">
             <section>
-               使用說明
+                {% if workout_menu %}
+                <h2>Generated Workout Menu</h2>
+                {% markdown %}
+                {{ workout_menu }}
+                {% endmarkdown %}
+                {% endif %}
             </section>
         </div>
     </main>

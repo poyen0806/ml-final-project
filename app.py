@@ -1,4 +1,6 @@
 # import modules
+import time
+from flask_markdown import markdown
 from flask import Flask, render_template, flash, redirect, url_for, request
 from form import TrainingForm
 from configparser import ConfigParser
@@ -6,7 +8,7 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
-
+markdown(app)
 config = ConfigParser()
 config.read("config.ini")
 genai.configure(api_key=config["Gemini"]["API_KEY"])
@@ -20,20 +22,11 @@ def test():
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
-    form = TrainingForm()
-    data = None  # 初始化 data 為 None
-    if form.validate_on_submit():
-        data = {
-            'height': form.height.data,
-            'weight': form.weight.data,
-            'body_part': form.body_part.data,
-            'video': form.video.data,
-            'photo': form.photo.data,
-            'additional_info': form.additional_info.data
-        }
-        flash('Data Submitted Successfully', 'success')
-        return render_template('home.html', form=form, data=data)
-    return render_template('home.html', form=form, data=data)
+    return render_template('home.html')
+
+@app.route('/photo', methods=['POST', 'GET'])
+def photo():
+    return render_template('photo.html')
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
@@ -61,13 +54,15 @@ def menu():
         }
         workout_menu = generate_workout_menu(data)
         flash('Workout Menu Generated Successfully', 'success')
-        return render_template('menu.html', form=form, data=data, workout_menu=workout_menu)
+        return render_template('output.html', workout_menu=workout_menu)
     else:
         for field, errors in form.errors.items():
             for error in errors:
                 flash(f"Error in the {getattr(form, field).label.text} field - {error}")
     return render_template('menu.html', form=form, data=data, workout_menu=workout_menu)
-
+@app.route('/output', methods=['GET', 'POST'])
+def output():
+    return render_template('output.html')
 def generate_workout_menu(data):
     # Initialize the generative model and give some simple advice
     llm = genai.GenerativeModel('gemini-1.5-flash')
