@@ -83,7 +83,7 @@ def generate_workout_menu(data):
     result = chat.send_message(data_str)
     
     # Generate a workout menu based on the advice
-    result = chat.send_message("請幫忙設計一個適合的訓練菜單，動作名稱、組數、每組做多少次請詳細說明。只需提供訓練菜單，不用提供飲食建議。")
+    result = chat.send_message("請幫忙設計一個適合的訓練菜單，動作名稱、組數、每組做多少次請詳細說明。只需提供訓練菜單，不用提供飲食建議，用Markdown格式輸出。")
     return result.text
 
 
