@@ -156,8 +156,8 @@ table {
   border-bottom: var(--nf-input-border-bottom-width) var(--nf-input-border-style) var(--nf-input-border-color);
   color: var(--nf-input-color);
   width: 100%;
-  padding: calc(var(--nf-input-size)*0.75);
-  height: calc(var(--nf-input-size)*2.75);
+  padding: calc(var(--nf-input-size)*0.6);
+  height: calc(var(--nf-input-size)*3);
   line-height: normal;
   -webkit-appearance: none;
   -moz-appearance: none;
