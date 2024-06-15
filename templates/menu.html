@@ -1,128 +1,134 @@
-{% extends "base.html" %}
-    {% block title %}
-      Training Menu Generator
-    {% endblock title %}
-    {% block head %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" /> 
-    <style>
-      input[type='radio']:checked::after {
-        background-color: black;
-      }
-    </style>
-    {% endblock head %}
+{% extends 'base.html' %}
+{% block title %}
+  Training Menu Generator
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .demo-page-content {
+      padding: 20px;
+    }
+    .btn-primary {
+      margin-top: 20px;
+    }
+  </style>
+{% endblock %}
 {% block content %}
-<main class="demo-page-content">
+  <main class="demo-page-content">
     <div class="container">
-      <h1>Training Menu Generator</h1>
       <section>
-      <form method="POST" novalidate action="{{ url_for('menu') }}">
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-          <label for="Gender" class="nice-form-group">Gender:</label>
-          {{ form.Gender(class="form-control", id="Gender") }}
-      </div>
-        <div class="nice-form-group">{{ form.Age.label }}
-          {{ form.Age(class='form-control') }}
-          {% if form.Age.errors %}
-            <div class="alert alert-danger">{{ form.Age.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">{{ form.Height.label }}
-          {{ form.Height(class='form-control') }}
-          {% if form.Height.errors %}
-            <div class="alert alert-danger">{{ form.Height.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.Weight.label }}
-          {{ form.Weight(class='form-control') }}
-          {% if form.Weight.errors %}
-            <div class="alert alert-danger">{{ form.Weight.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.SkeletalMuscleWeight.label }}
-          {{ form.SkeletalMuscleWeight(class='form-control') }}
-          {% if form.SkeletalMuscleWeight.errors %}
-            <div class="alert alert-danger">{{ form.SkeletalMuscleWeight.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.BodyFatWeight.label }}
-          {{ form.BodyFatWeight(class='form-control') }}
-          {% if form.BodyFatWeight.errors %}
-            <div class="alert alert-danger">{{ form.BodyFatWeight.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.BodyFatIndex.label }}
-          {{ form.BodyFatIndex(class='form-control') }}
-          {% if form.BodyFatIndex.errors %}
-            <div class="alert alert-danger">{{ form.BodyFatIndex.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.BodyFatPercentage.label }}
-          {{ form.BodyFatPercentage(class='form-control') }}
-          {% if form.BodyFatPercentage.errors %}
-            <div class="alert alert-danger">{{ form.BodyFatPercentage.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.BasalMetabolicRate.label }}
-          {{ form.BasalMetabolicRate(class='form-control') }}
-          {% if form.BasalMetabolicRate.errors %}
-            <div class="alert alert-danger">{{ form.BasalMetabolicRate.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.BodyWater.label }}
-          {{ form.BodyWater(class='form-control') }}
-          {% if form.BodyWater.errors %}
-            <div class="alert alert-danger">{{ form.BodyWater.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.LeftHandMuscleMass.label }}
-          {{ form.LeftHandMuscleMass(class='form-control') }}
-          {% if form.LeftHandMuscleMass.errors %}
-            <div class="alert alert-danger">{{ form.LeftHandMuscleMass.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.RightHandMuscleMass.label }}
-          {{ form.RightHandMuscleMass(class='form-control') }}
-          {% if form.RightHandMuscleMass.errors %}
-            <div class="alert alert-danger">{{ form.RightHandMuscleMass.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.LeftLegMuscleMass.label }}
-          {{ form.LeftLegMuscleMass(class='form-control') }}
-          {% if form.LeftLegMuscleMass.errors %}
-            <div class="alert alert-danger">{{ form.LeftLegMuscleMass.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.RightLegMuscleMass.label }}
-          {{ form.RightLegMuscleMass(class='form-control') }}
-          {% if form.RightLegMuscleMass.errors %}
-            <div class="alert alert-danger">{{ form.RightLegMuscleMass.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <div class="nice-form-group">
-          {{ form.TrunkMuscleMass.label }}
-          {{ form.TrunkMuscleMass(class='form-control') }}
-          {% if form.TrunkMuscleMass.errors %}
-            <div class="alert alert-danger">{{ form.TrunkMuscleMass.errors.0 }}</div>
-          {% endif %}
-        </div>
-        <button type="submit" class="btn btn-primary">Generate Workout Menu</button>
-      </form>
+        <h1>Training Menu Generator</h1>
+        <form method="POST" novalidate action="{{ url_for('menu') }}">
+          {{ form.hidden_tag() }}
+          <div class="nice-form-group">
+            {{ form.Gender.label }}
+            {{ form.Gender(class='form-control nice-form-input', id='Gender', style='height: calc(var(--nf-input-size)*3)') }}
+            {% if form.Gender.errors %}
+              <div class="alert alert-danger">{{ form.Gender.errors.0 }}</div>
+            {% endif %}
+          </div>          
+          <div class="nice-form-group">
+            {{ form.Age.label }}
+            {{ form.Age(class='form-control', style='width: 100%') }}
+            {% if form.Age.errors %}
+              <div class="alert alert-danger">{{ form.Age.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.Height.label }}
+            {{ form.Height(class='form-control') }}
+            {% if form.Height.errors %}
+              <div class="alert alert-danger">{{ form.Height.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.Weight.label }}
+            {{ form.Weight(class='form-control') }}
+            {% if form.Weight.errors %}
+              <div class="alert alert-danger">{{ form.Weight.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.SkeletalMuscleWeight.label }}
+            {{ form.SkeletalMuscleWeight(class='form-control') }}
+            {% if form.SkeletalMuscleWeight.errors %}
+              <div class="alert alert-danger">{{ form.SkeletalMuscleWeight.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.BodyFatWeight.label }}
+            {{ form.BodyFatWeight(class='form-control') }}
+            {% if form.BodyFatWeight.errors %}
+              <div class="alert alert-danger">{{ form.BodyFatWeight.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.BodyFatIndex.label }}
+            {{ form.BodyFatIndex(class='form-control') }}
+            {% if form.BodyFatIndex.errors %}
+              <div class="alert alert-danger">{{ form.BodyFatIndex.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.BodyFatPercentage.label }}
+            {{ form.BodyFatPercentage(class='form-control') }}
+            {% if form.BodyFatPercentage.errors %}
+              <div class="alert alert-danger">{{ form.BodyFatPercentage.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.BasalMetabolicRate.label }}
+            {{ form.BasalMetabolicRate(class='form-control') }}
+            {% if form.BasalMetabolicRate.errors %}
+              <div class="alert alert-danger">{{ form.BasalMetabolicRate.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.BodyWater.label }}
+            {{ form.BodyWater(class='form-control') }}
+            {% if form.BodyWater.errors %}
+              <div class="alert alert-danger">{{ form.BodyWater.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.LeftHandMuscleMass.label }}
+            {{ form.LeftHandMuscleMass(class='form-control') }}
+            {% if form.LeftHandMuscleMass.errors %}
+              <div class="alert alert-danger">{{ form.LeftHandMuscleMass.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.RightHandMuscleMass.label }}
+            {{ form.RightHandMuscleMass(class='form-control') }}
+            {% if form.RightHandMuscleMass.errors %}
+              <div class="alert alert-danger">{{ form.RightHandMuscleMass.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.LeftLegMuscleMass.label }}
+            {{ form.LeftLegMuscleMass(class='form-control') }}
+            {% if form.LeftLegMuscleMass.errors %}
+              <div class="alert alert-danger">{{ form.LeftLegMuscleMass.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.RightLegMuscleMass.label }}
+            {{ form.RightLegMuscleMass(class='form-control') }}
+            {% if form.RightLegMuscleMass.errors %}
+              <div class="alert alert-danger">{{ form.RightLegMuscleMass.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <div class="nice-form-group">
+            {{ form.TrunkMuscleMass.label }}
+            {{ form.TrunkMuscleMass(class='form-control') }}
+            {% if form.TrunkMuscleMass.errors %}
+              <div class="alert alert-danger">{{ form.TrunkMuscleMass.errors.0 }}</div>
+            {% endif %}
+          </div>
+          <button type="submit" class="btn btn-primary">生成訓練菜單</button>
+        </form>
       </section>
-      
-  
-
 
       {% if data %}
         <h2>Input Data</h2>
@@ -132,7 +138,6 @@
           {% endfor %}
         </ul>
       {% endif %}
-
     </div>
-    </main>
-    {% endblock content %}
+  </main>
+{% endblock %}
