@@ -1,16 +1,57 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block title %}
-Home
-{% endblock title %}
+  Home
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .demo-page-content {
+      padding: 20px;
+    }
+    .photo-primary {
+      margin-top: 20px;
+      width: 75%;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+  </style>
+{% endblock %}
 
 {% block content %}
-<div class="demo-page">
+  <div class="demo-page">
     <main class="demo-page-content">
-        <div class="home">
-            <section>
-               使用說明
-            </section>
-        </div>
+      <div class="home">
+        <section style="width: 150%;">
+          <h1>使用說明</h1>
+          <h1>一、生成訓練菜單</h1>
+          <h2>Step 1. 點選左上角的訓練菜單按鍵</h2>
+          <img src="{{ url_for('static', filename='images/image.png') }}" class="photo-primary" alt="" />
+          <h2>Step 2. 選擇生理性別</h2>
+          <img src="{{ url_for('static', filename='images/image copy.png') }}" class="photo-primary" alt="" />
+          <h2>Step 3. 輸入身體數據</h2>
+          <img src="{{ url_for('static', filename='images/image copy 2.png') }}" class="photo-primary" alt="" />
+          <h2>Step 4. 點擊生成訓練菜單</h2>
+          <img src="{{ url_for('static', filename='images/image copy 3.png') }}" class="photo-primary" alt="" />
+          <h2>Step 5. 取得生成結果</h2>
+          <img src="{{ url_for('static', filename='images/image copy 4.png') }}" class="photo-primary" alt="" />
+          <h1>二、健身姿勢調整</h1>
+          <h2>Step 1. 點擊左上角姿勢調整按鍵</h2>
+          <img src="{{ url_for('static', filename='images/image copy 5.png') }}" class="photo-primary" alt="" />
+          <h2>Step 2. 點擊選擇檔案</h2>
+          <img src="{{ url_for('static', filename='images/image copy 6.png') }}" class="photo-primary" alt="" />
+          <h2>Step 3. 選取想調整姿勢的圖片</h2>
+          <img src="{{ url_for('static', filename='images/image copy 7.png') }}" class="photo-primary" alt="" />
+          <h2>Step 4. 選擇完成後點選Submit 送出</h2>
+          <img src="{{ url_for('static', filename='images/image copy 8.png') }}" class="photo-primary" alt="" />
+          <h2>Step 5. 在圖片左上角得到結果</h2>
+          <img src="{{ url_for('static', filename='images/image copy 9.png') }}" class="photo-primary" alt="" />
+        </section>
+      </div>
     </main>
-</div>
-{% endblock content %}
+  </div>
+{% endblock %}
