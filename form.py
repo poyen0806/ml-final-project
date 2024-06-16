@@ -21,5 +21,5 @@ class TrainingForm(FlaskForm):
     submit = SubmitField('提交')
 
 class PhotoForm(FlaskForm):
-    video = FileField('影片', validators=[DataRequired()])
+    # video = FileField('影片', validators=[DataRequired()])
     photo = FileField('照片', validators=[DataRequired()])
