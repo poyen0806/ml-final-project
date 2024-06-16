@@ -9,8 +9,8 @@ Home
         <div class="home">
             <section>
                 {% if workout_menu %}
-                <h2>Generated Workout Menu</h2>
                 {% markdown %}
+                {{ "# 生成訓練菜單" }}
                 {{ workout_menu }}
                 {% endmarkdown %}
                 {% endif %}
