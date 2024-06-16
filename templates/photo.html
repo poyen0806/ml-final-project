@@ -1,41 +1,42 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block title %}
-Home
-{% endblock title %}
+  Home
+{% endblock %}
 {% block head %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" /> 
-{% endblock head%}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .demo-page-content {
+      padding: 20px;
+    }
+    .btn-primary {
+      margin-top: 20px;
+    }
+    .photo-primary {
+      margin-top: 20px;
+    }
+  </style>
+{% endblock %}
 {% block content %}
-<main class="demo-page-content">
+  <main class="demo-page-content">
     <div class="container">
-      <h1>姿勢調整</h1>
+      <section>
+        <h1>姿勢調整</h1>
         <form method="POST" novalidate enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <div class="nice-form-group">
-                {{ form.photo.label }}<br>
-                {{ form.photo() }}
-                {% for error in form.photo.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </div>
-            <input type="submit" value="Submit">
+          {{ form.hidden_tag() }}
+          <div class="nice-form-group">
+            {{ form.photo.label }}<br />
+            {{ form.photo() }}
+            {% for error in form.photo.errors %}
+              <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <input type="submit" class="btn btn-primary" value="Submit" />
         </form>
         {% if photo %}
-            <img src="{{ url_for('static', filename=photo) }}" alt="Uploaded Photo">
+          <img src="{{ url_for('static', filename=photo) }}" class="photo-primary" alt="Uploaded Photo" />
         {% endif %}
+      </section>
     </div>
-</main>
-
-
-
-
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-{% endblock content %}
+  </main>
+{% endblock %}
